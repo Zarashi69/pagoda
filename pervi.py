@@ -1,8 +1,12 @@
 import requests
 
+
 def get_weather(city: str, api_key: str) -> dict:
     try:
-        url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric&lang=ru"
+        url = (
+            f"http://api.openweathermap.org/data/2.5/weather?q={city}"
+            f"&appid={api_key}&units=metric&lang=ru"
+        )
         response = requests.get(url)
         data = response.json()
 
