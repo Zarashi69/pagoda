@@ -46,12 +46,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Check for changes
+        id: check_for_changes
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
           git diff --exit-code || echo "Есть изменения"
       - name: Commit and Push Changes
-        if: ${{ steps.Check_for_changes.outputs.exit-code != 0 }}
+        if: ${{ steps.check_for_changes.outcome == 'failure' }}
         run: |
           git add .
           git commit -m "Автоматическое обновление после успешных тестов"
