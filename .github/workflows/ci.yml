@@ -41,14 +41,14 @@ jobs:
 
   push:
     needs: test
-    if: success() 
+    if: success()  # Условие: этот шаг сработает только если тесты прошли успешно
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Commit and Push Changes
         run: |
-          git config user.name "Даниил"
-          git config user.email "ccanga373@gmail.com"
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
           git add .
           git commit -m "Автоматическое обновление после успешных тестов"
           git push origin main
