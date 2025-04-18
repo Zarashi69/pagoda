@@ -38,3 +38,19 @@ jobs:
           pip install pytest requests
       - name: Run tests
         run: pytest
+
+  push:
+    needs: test
+    if: success() 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Commit and Push Changes
+        run: |
+          git config user.name "Даниил"
+          git config user.email "ccanga373@gmail.com"
+          git add .
+          git commit -m "Автоматическое обновление после успешных тестов"
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
